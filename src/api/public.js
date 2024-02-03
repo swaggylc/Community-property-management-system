@@ -1,0 +1,6 @@
+// 一些公共的接口
+import request from "@/utils/request.js";
+
+export const login = (params) => {
+  return request.get("/public/login", {params});
+};
