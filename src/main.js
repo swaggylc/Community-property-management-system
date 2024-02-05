@@ -6,7 +6,7 @@ import "element-plus/dist/index.css";
 import zhCn from "element-plus/es/locale/lang/zh-cn"; //解决elementpLus一些组件是英文的问题
 
 import '../reset.css'
-import './iconfont/iconfont.scss'
+import '@/assets/iconfont/iconfont.scss'
 
 // 引入vue-router
 import router from "@/router/index.js";

@@ -12,9 +12,7 @@ const useUserStore = defineStore("User", {
   actions: {
     // 用户手机号登陆的方法
     async userLogin(params) {
-      // console.log(loginForm);
       let result = await login(params);
-      console.log(result, "result");
       if (result.code == 200) {
         this.userInfo = result.data;
         // 存储到本地，localStorage

@@ -8,12 +8,12 @@ export default createRouter({
   routes: [
     {
       path: "/",
-      redirect: "/login",
+      redirect: "/layout",
     },
     {
-      path: "/login",
-      name: "login",
-      component: () => import("@/page/login.vue"),
+      path: "/layout",
+      name: "layout",
+      component: () => import("@/page/layout/Layout.vue"),
     },
   ],
   //   滚动行为：控制滚动条的位置

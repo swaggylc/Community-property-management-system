@@ -73,8 +73,12 @@ const login = () => {
   loginForm.value.validate((valid) => {
     if (valid) {
       if (isPhone) {
-        console.log(form);
-        userStore.userLogin(form);
+        let params = {
+          account: form.account,
+          password: form.password,
+          type: form.type ? 1 : 0,
+        };
+        userStore.userLogin(params);
         // 跳转
       } else {
         ElMessage.error("请输入正确的手机号");
@@ -100,7 +104,7 @@ const userLogin = async () => {};
   justify-content: center;
   align-items: center;
   height: 100vh;
-  background-image: url("./../assets/images/R.jpg");
+  background-image: url("./../../assets/images/R.jpg");
   background-size: cover;
   background-position: center;
 }
