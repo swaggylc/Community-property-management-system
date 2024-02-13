@@ -8,12 +8,25 @@ export default createRouter({
   routes: [
     {
       path: "/",
-      redirect: "/layout",
+      redirect: "/center",
     },
     {
-      path: "/layout",
-      name: "layout",
+      path: "/center",
+      name: "center",
       component: () => import("@/page/layout/Layout.vue"),
+      redirect: "/center/home",
+      children: [
+        {
+          path: "/center/home",
+          name: "home",
+          component: () => import("@/page/home/Home.vue"),
+        },
+      ],
+    },
+    {
+      path:'/screen_data',
+      name:'screen_data',
+      component:()=>import('@/page/screen_data/ScreenData.vue')
     },
   ],
   //   滚动行为：控制滚动条的位置

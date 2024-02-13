@@ -6,7 +6,6 @@
  * 3、响应拦截器 ——> 可以简化服务器中返回的数据，处理http网络错误（状态码）
  */
 import axios from "axios";
-import { ElMessage } from "element-plus";
 
 // 创建一个axios实例
 const request = axios.create({

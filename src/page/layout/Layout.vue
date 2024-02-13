@@ -4,7 +4,6 @@
       <el-header class="header">
         <div class="header-title">小区物业管理系统</div>
         <el-menu
-          :default-active="activeIndex"
           class="el-header-menu"
           mode="horizontal"
           :ellipsis="false"
@@ -29,16 +28,16 @@
             active-text-color="#ffd04b"
             background-color="#545c64"
             class="el-menu-vertical-demo"
-            default-active="2"
+            default-active="1"
             text-color="#fff"
             @open="handleOpen"
             @close="handleClose"
           >
-            <el-menu-item index="1">
+            <el-menu-item index="1" @click="handleSelect('1')">
               <i class="iconfont icon-home"></i>
               <span>首页</span>
             </el-menu-item>
-            <el-menu-item index="2">
+            <el-menu-item index="2" @click="handleSelect('2')">
               <i class="iconfont icon-shujudaping"></i>
               <span>数据大屏</span>
             </el-menu-item>
@@ -67,12 +66,25 @@
 
 <script setup>
 import useUserStore from "@/store/userInfo.js";
-
+import { useRoute, useRouter } from "vue-router";
 import wechat from "@/assets/images/wechat.jpg";
 
 let userStore = useUserStore();
+let route = useRoute();
+let router = useRouter();
 
-console.log(userStore);
+/**
+ * @description: 点击侧边菜单的回调
+ * @param {string} index 菜单索引
+ * @return {}
+ */
+const handleSelect = (index) => {
+  if (index == 1) {
+    router.push({ name: "center" });
+  } else if (index == 2) {
+    router.push({ name: "screen_data" });
+  }
+};
 </script>
 
 <style lang="scss" scoped>
