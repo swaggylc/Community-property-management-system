@@ -54,9 +54,9 @@ onMounted(() => {
  */
 const getSoup = () => {
   axios
-    .get("https://v.api.aa1.cn/api/api-wenan-mingrenmingyan/index.php?aa1=json")
+    .get("https://api.aag.moe/api/sjyy?type=json")
     .then((res) => {
-      encourageObj.value = res.data[0].mingrenmingyan;
+      encourageObj.value = res.data.text;
     });
 };
 </script>

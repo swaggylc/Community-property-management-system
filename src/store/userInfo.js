@@ -1,3 +1,11 @@
+/*
+ * @Author: Lu Can lucanlc0417@gmail.com
+ * @Date: 2024-02-03 22:16:21
+ * @LastEditors: Lu Can lucanlc0417@gmail.com
+ * @LastEditTime: 2024-03-05 20:33:35
+ * @FilePath: \2024-毕业设计\admin\src\store\userInfo.js
+ * @Description: 这是默认设置,请设置`customMade`, 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
+ */
 import { defineStore } from "pinia";
 import { login } from "@/api/public";
 // 引入本地存储的方法
@@ -17,9 +25,15 @@ const useUserStore = defineStore("User", {
         this.userInfo = result.data;
         // 存储到本地，localStorage
         SET_TOKEN(JSON.stringify(this.userInfo));
-        return "ok";
+        return {
+          code: 200,
+          message: "登陆成功",
+        };
       } else {
-        return Promise.reject(result.message);
+        return {
+          code: 400,
+          message: result.msg,
+        };
       }
     },
   },

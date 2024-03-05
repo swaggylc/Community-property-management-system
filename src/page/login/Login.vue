@@ -37,6 +37,8 @@ import { ElMessage } from "element-plus";
 import useUserStore from "@/store/userInfo.js";
 import { useRoute, useRouter } from "vue-router";
 
+const router = useRouter();
+
 let userStore = useUserStore();
 
 let loginForm = ref(null);
@@ -78,7 +80,16 @@ const login = () => {
           password: form.password,
           type: form.type ? 1 : 0,
         };
-        userStore.userLogin(params);
+        let userLogin = userStore.userLogin(params);
+        userLogin.then((res) => {
+          if(res.code==200){
+            ElMessage.success("登录成功");
+            // 路由跳转
+            router.push("/center");
+          }else if(res.code==400){
+            ElMessage.error(res.message);
+          }
+        });
         // 跳转
       } else {
         ElMessage.error("请输入正确的手机号");

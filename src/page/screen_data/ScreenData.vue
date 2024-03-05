@@ -1,13 +1,133 @@
 <template>
-    <div>
-        数据大屏
+  <div class="container">
+    <!-- 展示内容区域 -->
+    <div class="screen" ref="screen">
+      <div class="top">
+        <!-- 引入子组件 -->
+        <Top></Top>
+      </div>
+      <div class="bottom">
+        <div class="left">
+          <!-- 引入子组件 -->
+          <AgeRatio></AgeRatio>
+          <AgeRatio></AgeRatio>
+          <AgeRatio></AgeRatio>
+        </div>
+        <div class="center">
+          <!-- 引入子组件 -->
+        </div>
+        <div class="right">
+          <!-- 引入子组件 -->
+        </div>
+      </div>
     </div>
+  </div>
 </template>
 
-<script setup>
+<script setup lang="ts">
+import { ref, onMounted } from "vue";
+// 引入子组件
+import Top from "./components/top/Top.vue";
+import AgeRatio from "./components/age_ratio/AgeRatio.vue";
 
+// 获取展示区域的dom
+let screen = ref();
+
+onMounted(() => {
+  screen.value.style.transform = `scale(${getScale()}) translate(-50%, -50%)`;
+});
+
+// 定义大屏缩放的比例
+function getScale(w = 1920, h = 1080) {
+  const ww = window.innerWidth / w;
+  const hh = window.innerHeight / h;
+  return ww > hh ? hh : ww;
+}
+
+// 监听视口的变化
+window.onresize = () => {
+  screen.value.style.transform = `scale(${getScale()}) translate(-50%, -50%)`;
+};
 </script>
 
-<style lang="scss" scoped>
+<style scoped lang="scss">
+.container {
+  width: 100vw;
+  height: 100vh;
+  background: url(../../assets/images/bg.png) no-repeat;
+  background-size: cover;
 
+  .screen {
+    position: fixed;
+    width: 1920px;
+    height: 1080px;
+    left: 50%;
+    top: 50%;
+    transform-origin: left top;
+
+    .top {
+      width: 100%;
+      height: 40px;
+    }
+
+    .bottom {
+      display: flex;
+
+      .left {
+        display: flex;
+        flex-direction: column;
+        flex: 1;
+        height: 1040px;
+
+        .visitorNow {
+          flex: 1.2;
+        }
+
+        .sexRatio {
+          flex: 1;
+        }
+
+        .ageRatio {
+          flex: 1;
+        }
+      }
+
+      .center {
+        flex: 2;
+        display: flex;
+        flex-direction: column;
+        height: 960px;
+        margin-top: 30px;
+        align-items: center;
+
+        .map {
+          flex: 4;
+        }
+
+        .mapBottom {
+          flex: 1;
+        }
+      }
+
+      .right {
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+        height: 1040px;
+
+        .ranking {
+          flex: 1.2;
+        }
+
+        .visitorNumber {
+          flex: 1;
+        }
+
+        .bookingType {
+          flex: 1;
+        }
+      }
+    }
+  }
+}
 </style>
