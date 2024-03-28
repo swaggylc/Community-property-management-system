@@ -18,6 +18,9 @@ export default createRouter({
       path: "/login",
       name: "login",
       component: () => import("@/page/login/Login.vue"),
+      meta: {
+        title: "登录",
+      },
     },
     {
       path: "/",
@@ -33,13 +36,27 @@ export default createRouter({
           path: "/center/home",
           name: "home",
           component: () => import("@/page/home/Home.vue"),
+          meta: {
+            title: "首页",
+          },
+        },
+        {
+          path: "/center/user_manage",
+          name: "user_manage",
+          component: () => import("@/page/user_manage/UserManage.vue"),
+          meta: {
+            title: "用户管理",
+          },
         },
       ],
     },
     {
-      path:'/screen_data',
-      name:'screen_data',
-      component:()=>import('@/page/screen_data/ScreenData.vue')
+      path: "/screen_data",
+      name: "screen_data",
+      component: () => import("@/page/screen_data/ScreenData.vue"),
+      meta: {
+        title: "数据大屏",
+      },
     },
   ],
   //   滚动行为：控制滚动条的位置

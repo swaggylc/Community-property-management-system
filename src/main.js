@@ -20,8 +20,8 @@ const app = createApp(App);
 app.use(router);
 // 安装pinia
 app.use(pinia);
-
-
+// 引入路由鉴权文件
+import '@/Authentication.js'
 
 
 

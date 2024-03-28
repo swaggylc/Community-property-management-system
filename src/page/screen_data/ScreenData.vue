@@ -9,27 +9,36 @@
       <div class="bottom">
         <div class="left">
           <!-- 引入子组件 -->
-          <AgeRatio></AgeRatio>
-          <AgeRatio></AgeRatio>
-          <AgeRatio></AgeRatio>
+          <visitorNow class="visitor-now"></visitorNow>
+          <sexRatio class="sex-ratio"></sexRatio>
+          <visitorNumber class="visitor-number"></visitorNumber>
         </div>
         <div class="center">
           <!-- 引入子组件 -->
+          <Map class="map"></Map>
         </div>
         <div class="right">
           <!-- 引入子组件 -->
+          <Ranking class="ranking"></Ranking>
+          <AgeRatio class="age-ratio"></AgeRatio>
+          <VisitorRatio class="visitor-ratio"></VisitorRatio>
         </div>
       </div>
     </div>
   </div>
 </template>
 
-<script setup lang="ts">
+<script setup>
 import { ref, onMounted } from "vue";
 // 引入子组件
 import Top from "./components/top/Top.vue";
+import Map from "./components/map/Map.vue";
 import AgeRatio from "./components/age_ratio/AgeRatio.vue";
-
+import VisitorRatio from "./components/visitor_ratio/VisitorRatio.vue";
+import Ranking from "./components/ranking/Ranking.vue";
+import visitorNumber from "./components/visitor_number/visitorNumber.vue";
+import visitorNow from "./components/visitor_now/visitorNow.vue";
+import sexRatio from "./components/sex_ratio/sexRatio.vue";
 // 获取展示区域的dom
 let screen = ref();
 
@@ -38,7 +47,7 @@ onMounted(() => {
 });
 
 // 定义大屏缩放的比例
-function getScale(w = 1920, h = 1080) {
+function getScale(w = 2560, h = 1440) {
   const ww = window.innerWidth / w;
   const hh = window.innerHeight / h;
   return ww > hh ? hh : ww;
@@ -59,8 +68,8 @@ window.onresize = () => {
 
   .screen {
     position: fixed;
-    width: 1920px;
-    height: 1080px;
+    width: 2560px;
+    height: 1440px;
     left: 50%;
     top: 50%;
     transform-origin: left top;
@@ -77,17 +86,17 @@ window.onresize = () => {
         display: flex;
         flex-direction: column;
         flex: 1;
-        height: 1040px;
+        height: 1224px;
 
-        .visitorNow {
-          flex: 1.2;
-        }
-
-        .sexRatio {
+        .visitor-now {
           flex: 1;
         }
 
-        .ageRatio {
+        .sex-ratio {
+          flex: 1;
+        }
+
+        .age-ratio {
           flex: 1;
         }
       }
@@ -96,7 +105,7 @@ window.onresize = () => {
         flex: 2;
         display: flex;
         flex-direction: column;
-        height: 960px;
+        height: 1080px;
         margin-top: 30px;
         align-items: center;
 
@@ -104,7 +113,7 @@ window.onresize = () => {
           flex: 4;
         }
 
-        .mapBottom {
+        .map-bottom {
           flex: 1;
         }
       }
@@ -113,17 +122,17 @@ window.onresize = () => {
         flex: 1;
         display: flex;
         flex-direction: column;
-        height: 1040px;
+        height: 1224px;
 
         .ranking {
-          flex: 1.2;
-        }
-
-        .visitorNumber {
           flex: 1;
         }
 
-        .bookingType {
+        .visitor-number {
+          flex: 1;
+        }
+
+        .visitor-ratio {
           flex: 1;
         }
       }

@@ -14,11 +14,13 @@
           <el-menu-item index="1">Processing Center</el-menu-item>
           <el-menu-item index="1">Processing Center</el-menu-item>
           <el-sub-menu index="2">
-            <template #title>{{ userStore.userInfo.username }}</template>
+            <template #title>{{
+              userStore.userInfo ? userStore.userInfo.username : ""
+            }}</template>
             <el-menu-item index="2-1">item one</el-menu-item>
             <el-menu-item index="2-2">item two</el-menu-item>
             <el-menu-item index="2-3">item three</el-menu-item>
-            <el-menu-item index="2-4">退出登录</el-menu-item>
+            <el-menu-item index="2-4" @click="logout">退出登录</el-menu-item>
           </el-sub-menu>
         </el-menu>
       </el-header>
@@ -30,8 +32,6 @@
             class="el-menu-vertical-demo"
             default-active="1"
             text-color="#fff"
-            @open="handleOpen"
-            @close="handleClose"
           >
             <el-menu-item index="1" @click="handleSelect('1')">
               <i class="iconfont icon-home"></i>
@@ -41,7 +41,7 @@
               <i class="iconfont icon-shujudaping"></i>
               <span>数据大屏</span>
             </el-menu-item>
-            <el-menu-item index="3">
+            <el-menu-item index="3" @click="handleSelect('3')">
               <i class="iconfont icon-user"></i>
               <span>用户管理</span>
             </el-menu-item>
@@ -68,6 +68,7 @@
 import useUserStore from "@/store/userInfo.js";
 import { useRoute, useRouter } from "vue-router";
 import wechat from "@/assets/images/wechat.jpg";
+import { REMOVE_TOKEN } from "@/utils/localFunction.js";
 
 let userStore = useUserStore();
 let route = useRoute();
@@ -83,7 +84,19 @@ const handleSelect = (index) => {
     router.push({ name: "center" });
   } else if (index == 2) {
     router.push({ name: "screen_data" });
+  } else if (index == 3) {
+    router.push({ name: "user_manage" });
   }
+};
+/**
+ * @description: 退出登陆的回调
+ * @return {}
+ */
+const logout = () => {
+  // 清除token
+  REMOVE_TOKEN();
+  // 跳转登录页
+  router.push({ name: "login" });
 };
 </script>
 

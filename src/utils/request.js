@@ -6,7 +6,7 @@
  * 3、响应拦截器 ——> 可以简化服务器中返回的数据，处理http网络错误（状态码）
  */
 import axios from "axios";
-
+import { GET_TOKEN } from "./localFunction";
 // 创建一个axios实例
 const request = axios.create({
   baseURL: "http://localhost:3000/", // 基础路径(在端口号后)
@@ -18,7 +18,11 @@ request.interceptors.request.use((config) => {
   // config:请求拦截器回调注入的对象（配置信息），有headers属性，可以通过这个属性设置请求头
   // 例如携带公共参数：token
   // 获取用户信息
-
+  if (GET_TOKEN()) {
+    let token = JSON.parse(GET_TOKEN()).token;
+    // 这个请求头的格式需要符合expressJwt规定的格式
+    config.headers["Authorization"] = "Bearer" + " " + token;
+  }
   return config;
 });
 

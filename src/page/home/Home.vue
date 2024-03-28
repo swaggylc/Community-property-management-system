@@ -3,7 +3,9 @@
     <div class="home-content">
       <img :src="avatarImg" alt="" />
       <div class="home-text">
-        <p>Hi,欢迎你：{{ userStore.userInfo.username }}</p>
+        <p>
+          Hi,欢迎你：{{ userStore.userInfo ? userStore.userInfo.username : "" }}
+        </p>
         <span :title="encourageObj">{{ encourageObj }}</span>
       </div>
     </div>
@@ -25,6 +27,8 @@ import swiperOne from "@/assets/images/swiper_one.jpg";
 import swiperTwo from "@/assets/images/swiper_two.jpg";
 import swiperThree from "@/assets/images/swiper_three.jpg";
 import { reactive, onMounted, ref } from "vue";
+import { getNowTime } from "@/utils/utils.js";
+import { ElNotification } from "element-plus";
 let userStore = useUserStore();
 
 let encourageObj = ref("");
@@ -46,6 +50,11 @@ let swiperArr = [
 
 onMounted(() => {
   getSoup();
+  ElNotification({
+    title: getNowTime(),
+    message: "欢迎来到xx小区物业管理系统",
+    type: "success",
+  });
 });
 
 /**
@@ -53,11 +62,9 @@ onMounted(() => {
  * @return {}
  */
 const getSoup = () => {
-  axios
-    .get("https://api.aag.moe/api/sjyy?type=json")
-    .then((res) => {
-      encourageObj.value = res.data.text;
-    });
+  axios.get("https://api.aag.moe/api/sjyy?type=json").then((res) => {
+    encourageObj.value = res.data.text;
+  });
 };
 </script>
 
