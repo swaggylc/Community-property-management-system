@@ -7,6 +7,8 @@
  */
 import axios from "axios";
 import { GET_TOKEN } from "./localFunction";
+import { ElMessage } from "element-plus";
+import router from "../router";
 // 创建一个axios实例
 const request = axios.create({
   baseURL: "http://localhost:3000/", // 基础路径(在端口号后)
@@ -30,6 +32,17 @@ request.interceptors.request.use((config) => {
 request.interceptors.response.use(
   (res) => {
     // 成功的回调，一般会对服务器返回的数据进行处理
+    if (res.data.code == 401) {
+      // token过期
+      // 跳转到登录页面
+      ElMessage({
+        type: "error",
+        message: "登录过期，请重新登录",
+      });
+      router.push({
+        name: "login",
+      });
+    }
     return res.data;
   },
   (error) => {

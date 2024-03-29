@@ -3,12 +3,7 @@
     <el-container>
       <el-header class="header">
         <div class="header-title">小区物业管理系统</div>
-        <el-menu
-          class="el-header-menu"
-          mode="horizontal"
-          :ellipsis="false"
-          @select="handleSelect"
-        >
+        <el-menu class="el-header-menu" mode="horizontal" :ellipsis="false">
           <div class="flex-grow" />
           <el-menu-item index="1">Processing Center</el-menu-item>
           <el-menu-item index="1">Processing Center</el-menu-item>
@@ -30,24 +25,47 @@
             active-text-color="#ffd04b"
             background-color="#545c64"
             class="el-menu-vertical-demo"
-            default-active="1"
+            :default-active="defaultActive"
             text-color="#fff"
           >
-            <el-menu-item index="1" @click="handleSelect('1')">
+            <el-menu-item index="home" @click="handleSelect('home')">
               <i class="iconfont icon-home"></i>
               <span>首页</span>
             </el-menu-item>
-            <el-menu-item index="2" @click="handleSelect('2')">
+            <el-menu-item
+              index="screen_data"
+              @click="handleSelect('screen_data')"
+            >
               <i class="iconfont icon-shujudaping"></i>
               <span>数据大屏</span>
             </el-menu-item>
-            <el-menu-item index="3" @click="handleSelect('3')">
+            <el-menu-item v-if="userStore.userInfo.type == 1"
+              index="user_manage"
+              @click="handleSelect('user_manage')"
+            >
               <i class="iconfont icon-user"></i>
               <span>用户管理</span>
             </el-menu-item>
-            <el-menu-item index="4">
+            <el-menu-item v-if="userStore.userInfo.type == 1"
+              index="repair_manage"
+              @click="handleSelect('repair_manage')"
+            >
               <i class="iconfont icon-baoxiu"></i>
               <span>保修管理</span>
+            </el-menu-item>
+            <el-menu-item v-if="userStore.userInfo.type == 0"
+              index="user_repair"
+              @click="handleSelect('user_repair')"
+            >
+              <i class="iconfont icon-baoxiu"></i>
+              <span>我要报修</span>
+            </el-menu-item>
+            <el-menu-item v-if="userStore.userInfo.type == 0"
+              index="my_repair"
+              @click="handleSelect('my_repair')"
+            >
+              <i class="iconfont icon-baoxiujilu"></i>
+              <span>报修记录</span>
             </el-menu-item>
           </el-menu>
           <div class="aside-info">
@@ -73,20 +91,15 @@ import { REMOVE_TOKEN } from "@/utils/localFunction.js";
 let userStore = useUserStore();
 let route = useRoute();
 let router = useRouter();
+const defaultActive = route.name || "home";
 
 /**
  * @description: 点击侧边菜单的回调
  * @param {string} index 菜单索引
  * @return {}
  */
-const handleSelect = (index) => {
-  if (index == 1) {
-    router.push({ name: "center" });
-  } else if (index == 2) {
-    router.push({ name: "screen_data" });
-  } else if (index == 3) {
-    router.push({ name: "user_manage" });
-  }
+const handleSelect = (name) => {
+  router.push({ name });
 };
 /**
  * @description: 退出登陆的回调

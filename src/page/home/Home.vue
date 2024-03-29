@@ -49,12 +49,7 @@ let swiperArr = [
 ];
 
 onMounted(() => {
-  getSoup();
-  ElNotification({
-    title: getNowTime(),
-    message: "欢迎来到xx小区物业管理系统",
-    type: "success",
-  });
+  hasDailySentence();
 });
 
 /**
@@ -64,7 +59,25 @@ onMounted(() => {
 const getSoup = () => {
   axios.get("https://api.aag.moe/api/sjyy?type=json").then((res) => {
     encourageObj.value = res.data.text;
+    userStore.dailySentence = res.data.text;
   });
+    ElNotification({
+    title: getNowTime(),
+    message: "欢迎来到xx小区物业管理系统",
+    type: "success",
+  });
+};
+/**
+ * @description:
+ * @param {}
+ * @return {}
+ */
+const hasDailySentence = () => {
+  if (userStore.dailySentence) {
+    encourageObj.value = userStore.dailySentence;
+  } else {
+    getSoup();
+  }
 };
 </script>
 

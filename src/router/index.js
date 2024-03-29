@@ -48,6 +48,22 @@ export default createRouter({
             title: "用户管理",
           },
         },
+        {
+          path: "/center/repair_manage",
+          name: "repair_manage",
+          component: () => import("@/page/repair_manage/RepairManage.vue"),
+          meta: {
+            title: "报修管理",
+          },
+        },
+        {
+          path: "/center/user_repair",
+          name: "user_repair",
+          component: () => import("@/page/user_repair/UserRepair.vue"),
+          meta: {
+            title: "用户报修",
+          },
+        }
       ],
     },
     {
