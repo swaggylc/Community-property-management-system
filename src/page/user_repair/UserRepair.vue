@@ -9,7 +9,7 @@
       <div class="repair-content">
         <el-form
           label-width="100px"
-          :data="repairFormData"
+          :model="repairFormData"
           :rules="rules"
           ref="repairForm"
         >
@@ -57,6 +57,7 @@ const repairFormData = ref({
   account: userStore.userInfo.account,
   address: "",
   content: "",
+  createTime:"",
 });
 
 const repairForm = ref(null);
@@ -92,6 +93,7 @@ const addRepair = () => {
       // 去除空格
       repairFormData.value.address = repairFormData.value.address.trim();
       repairFormData.value.content = repairFormData.value.content.trim();
+      repairFormData.value.createTime = new Date().toLocaleString();
       const res = await ADD_REPAIR(repairFormData.value);
       if (res.code === 200) {
         ElMessage({

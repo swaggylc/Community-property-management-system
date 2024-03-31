@@ -6,16 +6,12 @@
         <el-menu class="el-header-menu" mode="horizontal" :ellipsis="false">
           <div class="flex-grow" />
           <el-menu-item index="1">Processing Center</el-menu-item>
-          <el-menu-item index="1">Processing Center</el-menu-item>
-          <el-menu-item index="1">Processing Center</el-menu-item>
           <el-sub-menu index="2">
             <template #title>{{
               userStore.userInfo ? userStore.userInfo.username : ""
             }}</template>
-            <el-menu-item index="2-1">item one</el-menu-item>
-            <el-menu-item index="2-2">item two</el-menu-item>
-            <el-menu-item index="2-3">item three</el-menu-item>
-            <el-menu-item index="2-4" @click="logout">退出登录</el-menu-item>
+            <el-menu-item index="2-1">账号设置</el-menu-item>
+            <el-menu-item index="2-2" @click="logout">退出登录</el-menu-item>
           </el-sub-menu>
         </el-menu>
       </el-header>
@@ -65,8 +61,8 @@
             </el-menu-item>
             <el-menu-item
               v-if="userStore.userInfo.type == 0"
-              index="my_repair"
-              @click="handleSelect('my_repair')"
+              index="repair_history"
+              @click="handleSelect('repair_history')"
             >
               <i class="iconfont icon-baoxiujilu"></i>
               <span>报修记录</span>

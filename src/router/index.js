@@ -63,6 +63,14 @@ export default createRouter({
           meta: {
             title: "用户报修",
           },
+        },
+        {
+          path: "/center/repair_history",
+          name: "repair_history",
+          component: () => import("@/page/repair_history/RepairHistory.vue"),
+          meta: {
+            title: "我的报修",
+          },
         }
       ],
     },
