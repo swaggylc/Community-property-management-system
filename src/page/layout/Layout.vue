@@ -39,28 +39,32 @@
               <i class="iconfont icon-shujudaping"></i>
               <span>数据大屏</span>
             </el-menu-item>
-            <el-menu-item v-if="userStore.userInfo.type == 1"
+            <el-menu-item
+              v-if="userStore.userInfo.type == 1"
               index="user_manage"
               @click="handleSelect('user_manage')"
             >
               <i class="iconfont icon-user"></i>
               <span>用户管理</span>
             </el-menu-item>
-            <el-menu-item v-if="userStore.userInfo.type == 1"
+            <el-menu-item
+              v-if="userStore.userInfo.type == 1"
               index="repair_manage"
               @click="handleSelect('repair_manage')"
             >
               <i class="iconfont icon-baoxiu"></i>
               <span>保修管理</span>
             </el-menu-item>
-            <el-menu-item v-if="userStore.userInfo.type == 0"
+            <el-menu-item
+              v-if="userStore.userInfo.type == 0"
               index="user_repair"
               @click="handleSelect('user_repair')"
             >
               <i class="iconfont icon-baoxiu"></i>
               <span>我要报修</span>
             </el-menu-item>
-            <el-menu-item v-if="userStore.userInfo.type == 0"
+            <el-menu-item
+              v-if="userStore.userInfo.type == 0"
               index="my_repair"
               @click="handleSelect('my_repair')"
             >
@@ -134,13 +138,17 @@ const logout = () => {
     width: 200px;
     height: calc(100vh - 60px);
     background: #545c64;
-    .el-menu-item {
-      display: flex;
-      justify-content: center;
-      i {
-        margin-right: 8px;
+    .el-menu-vertical-demo {
+      border-right: none;
+      .el-menu-item {
+        display: flex;
+        justify-content: center;
+        i {
+          margin-right: 8px;
+        }
       }
     }
+
     .aside-info {
       display: flex;
       flex-direction: column;

@@ -7,19 +7,24 @@
         </div>
       </template>
       <div class="repair-content">
-        <el-form label-width="100px" :data="repairForm">
+        <el-form
+          label-width="100px"
+          :data="repairFormData"
+          :rules="rules"
+          ref="repairForm"
+        >
           <el-form-item label="报修人">
-            <el-input v-model="repairForm.name" disabled></el-input>
+            <el-input v-model="repairFormData.name" disabled></el-input>
           </el-form-item>
           <el-form-item label="联系方式">
-            <el-input v-model="repairForm.account" disabled></el-input>
+            <el-input v-model="repairFormData.account" disabled></el-input>
           </el-form-item>
-          <el-form-item label="报修地址">
-            <el-input v-model="repairForm.address"></el-input>
+          <el-form-item label="报修地址" prop="address">
+            <el-input v-model="repairFormData.address"></el-input>
           </el-form-item>
-          <el-form-item label="报修内容">
+          <el-form-item label="报修内容" prop="content">
             <el-input
-              v-model="repairForm.content"
+              v-model="repairFormData.content"
               type="textarea"
               :rows="4"
             ></el-input>
@@ -28,8 +33,10 @@
       </div>
       <template #footer>
         <div class="card-footer">
-          <el-button type="primary" style="width: 120px">提交</el-button>
-          <el-button>重置</el-button>
+          <el-button type="primary" style="width: 120px" @click="addRepair"
+            >提交</el-button
+          >
+          <el-button @click="reset">重置</el-button>
         </div>
       </template>
     </el-card>
@@ -44,7 +51,7 @@ import useUserStore from "@/store/userInfo.js";
 
 const userStore = useUserStore();
 
-const repairForm = ref({
+const repairFormData = ref({
   uid: userStore.userInfo.uid,
   name: userStore.userInfo.name,
   account: userStore.userInfo.account,
@@ -52,24 +59,63 @@ const repairForm = ref({
   content: "",
 });
 
+const repairForm = ref(null);
+
+// 校验规则
+const rules = ref({
+  address: [
+    {
+      required: true,
+      message: "请输入报修地址",
+      trigger: "blur",
+    },
+  ],
+  content: [
+    {
+      required: true,
+      message: "请输入报修内容",
+      trigger: "blur",
+    },
+  ],
+});
+
 /**
  * @description: 添加报修
  * @param {object}
  * @return {}
  */
-const addRepair = async () => {
-  const res = await ADD_REPAIR(repairForm.value);
-  if (res.code === 200) {
-    ElMessage({
-      type: "success",
-      message: "添加报修成功,请等待工作人员联系",
-    });
-  } else {
-    ElMessage({
-      type: "error",
-      message: "添加报修失败,请重试！",
-    });
-  }
+const addRepair = () => {
+  repairForm.value.validate(async (valid) => {
+    if (!valid) {
+      return;
+    } else {
+      // 去除空格
+      repairFormData.value.address = repairFormData.value.address.trim();
+      repairFormData.value.content = repairFormData.value.content.trim();
+      const res = await ADD_REPAIR(repairFormData.value);
+      if (res.code === 200) {
+        ElMessage({
+          type: "success",
+          message: "添加报修成功,请等待工作人员联系",
+        });
+        reset();
+      } else {
+        ElMessage({
+          type: "error",
+          message: "添加报修失败,请重试！",
+        });
+      }
+    }
+  });
+};
+
+/**
+ * @description: 点击重置的回调
+ * @return {}
+ */
+const reset = () => {
+  repairFormData.value.address = "";
+  repairFormData.value.content = "";
 };
 </script>
 
