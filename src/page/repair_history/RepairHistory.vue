@@ -31,7 +31,7 @@
               <span style="color: #999" v-if="scope.row.status == 0">
                 已报修
               </span>
-              <span style="color: #1f6cdd" v-if="scope.row.status == 1">
+              <span style="color: #fa9600" v-if="scope.row.status == 1">
                 维修中
               </span>
               <span style="color: #62b548" v-if="scope.row.status == 2">
@@ -55,13 +55,13 @@
                 </template>
               </el-popconfirm>
               <el-button
-                v-if="scope.row.appraise == ''"
+                v-if="scope.row.appraise_status == 0"
                 type="default"
                 :disabled="scope.row.status != 2"
                 @click="goAppraise(scope.row)"
                 >去评价</el-button
               >
-              <el-button v-if="scope.row.appraise != ''" type="default" disabled
+              <el-button v-if="scope.row.appraise_status == 1" type="default" disabled
                 >已评价</el-button
               >
             </div>

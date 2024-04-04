@@ -49,7 +49,7 @@
               @click="handleSelect('repair_manage')"
             >
               <i class="iconfont icon-baoxiu"></i>
-              <span>保修管理</span>
+              <span>报修管理</span>
             </el-menu-item>
             <el-menu-item
               v-if="userStore.userInfo.type == 0"
@@ -66,6 +66,14 @@
             >
               <i class="iconfont icon-baoxiujilu"></i>
               <span>报修记录</span>
+            </el-menu-item>
+            <el-menu-item
+              v-if="userStore.userInfo.type == 1"
+              index="visitor_log"
+              @click="handleSelect('visitor_log')"
+            >
+              <i class="iconfont icon-rusuodengji"></i>
+              <span>访客登记</span>
             </el-menu-item>
           </el-menu>
           <div class="aside-info">

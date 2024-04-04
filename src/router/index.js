@@ -71,6 +71,13 @@ export default createRouter({
           meta: {
             title: "我的报修",
           },
+        },{
+          path: "/center/visitor_log",
+          name: "visitor_log",
+          component: () => import("@/page/visitor_log/VisitorLog.vue"),
+          meta: {
+            title: "访客登记",
+          },
         }
       ],
     },

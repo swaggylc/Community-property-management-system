@@ -55,7 +55,7 @@ const repairFormData = ref({
   uid: userStore.userInfo.uid,
   name: userStore.userInfo.name,
   account: userStore.userInfo.account,
-  address: "",
+  address: userStore.userInfo.address,
   content: "",
   createTime:"",
 });
