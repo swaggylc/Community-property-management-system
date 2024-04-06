@@ -13,70 +13,101 @@
       </div>
     </div>
     <div class="line">
-      <p>男性58%</p>
-      <p>女性42%</p>
+      <p>男性{{ manPoint }}%</p>
+      <p>女性{{ 100 - manPoint }}%</p>
     </div>
     <div class="charts" ref="chartsTwo"></div>
   </div>
 </template>
 
-<script setup lang="ts">
+<script setup>
 import * as echarts from "echarts";
-import { onMounted, ref } from "vue";
+import { onMounted, ref, computed, watch } from "vue";
+import { GET_USER_NUMBER } from "@/api/public";
 let chartsTwo = ref();
+let manNumber = ref();
+let womanNumber = ref();
+
+//计算性别比例
+const manPoint = computed(() => {
+  return (
+    (manNumber.value / (manNumber.value + womanNumber.value)) *
+    100
+  ).toFixed(1);
+});
+
+// 监听manNumber的值
+watch(manNumber, (newValue, oldValue) => {
+  if (newValue) {
+    let myChart = echarts.init(chartsTwo.value);
+    myChart.setOption({
+      tooltip: {
+        show: true,
+      },
+      xAxis: {
+        show: false,
+        min: 0,
+        max: 100,
+      },
+      yAxis: {
+        show: false,
+        type: "category",
+      },
+      series: [
+        {
+          type: "bar",
+          data: [manPoint.value],
+          barWidth: 20,
+          z: 99,
+          itemStyle: {
+            color: "#294D99",
+            borderRadius: 10,
+          },
+        },
+        {
+          type: "bar",
+          data: [100],
+          barWidth: 20,
+          barGap: "-100%", // 两个柱子重叠
+          itemStyle: {
+            color: "#ff8576",
+            borderRadius: 10,
+          },
+        },
+      ],
+      grid: {
+        top: 0,
+        left: 0,
+        right: 0,
+        bottom: 0,
+      },
+    });
+  }
+});
 
 onMounted(() => {
-  let myChart = echarts.init(chartsTwo.value);
-  myChart.setOption({
-    tooltip: {
-      show: true,
-    },
-    xAxis: {
-      show: false,
-      min: 0,
-      max: 100,
-    },
-    yAxis: {
-      show: false,
-      type: "category",
-    },
-    series: [
-      {
-        type: "bar",
-        data: [58],
-        barWidth: 20,
-        z: 99,
-        itemStyle: {
-          color: "#294D99",
-          borderRadius: 10,
-        },
-      },
-      {
-        type: "bar",
-        data: [100],
-        barWidth: 20,
-        barGap: "-100%", // 两个柱子重叠
-        itemStyle: {
-          color: "#ff8576",
-          borderRadius: 10,
-        },
-      },
-    ],
-    grid: {
-      top: 0,
-      left: 0,
-      right: 0,
-      bottom: 0,
-    },
-  });
+  getSexRatio();
 });
+
+/**
+ * @description:
+ * @param {}
+ * @return {}
+ */
+const getSexRatio = async () => {
+  const res = await GET_USER_NUMBER();
+  if (res.code == 200) {
+    manNumber.value = res.data[1].sex_count;
+    womanNumber.value = res.data[0].sex_count;
+  }
+};
 </script>
 
 <style scoped lang="scss">
 .sex {
   height: 100%;
   width: 100%;
-  background: url(../../../../assets/images/dataScreen-main-cb.png) no-repeat;
+  // background: url(../../../../assets/images/dataScreen-main-cb.png) no-repeat;
   background-size: 100% 100%;
   margin: 20px 0;
 

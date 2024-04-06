@@ -76,7 +76,7 @@ onMounted(() => {
 
 <style scoped lang="scss">
 .visitor {
-    background: url(../../../../assets/images/dataScreen-main-lb.png) no-repeat;
+    // background: url(../../../../assets/images/dataScreen-main-lb.png) no-repeat;
     background-size: 100% 100%;
     margin-top: 20px;
 

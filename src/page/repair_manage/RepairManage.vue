@@ -78,7 +78,6 @@
           </template>
         </el-table-column>
       </el-table>
-      <template #footer>Footer content</template>
     </el-card>
   </div>
 </template>

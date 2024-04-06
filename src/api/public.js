@@ -8,6 +8,10 @@ export const LOGIN = (params) => {
 export const REGISTER = (params) => {
   return request.post("/public/register", params);
 };
+// 获取男女用户数量
+export const GET_USER_NUMBER = () => {
+  return request.get("/public/sex_ratio");
+};
 // 获取报修列表
 export const GET_REPAIR_LIST = (params) => {
   return request.get("/public/repair_list");
