@@ -22,6 +22,20 @@
           <el-form-item label="报修地址" prop="address">
             <el-input v-model="repairFormData.address"></el-input>
           </el-form-item>
+          <el-form-item label="报修种类" prop="type">
+            <el-select
+              placeholder="请选择报修种类"
+              style="width: 240px"
+              v-model="repairFormData.type"
+            >
+              <el-option
+                v-for="item in typeOptions"
+                :key="item.value"
+                :label="item.label"
+                :value="item.value"
+              />
+            </el-select>
+          </el-form-item>
           <el-form-item label="报修内容" prop="content">
             <el-input
               v-model="repairFormData.content"
@@ -57,7 +71,8 @@ const repairFormData = ref({
   account: userStore.userInfo.account,
   address: userStore.userInfo.address,
   content: "",
-  createTime:"",
+  createTime: "",
+  type: "",
 });
 
 const repairForm = ref(null);
@@ -78,7 +93,42 @@ const rules = ref({
       trigger: "blur",
     },
   ],
+  type: [
+    {
+      required: true,
+      message: "请选择报修种类",
+      trigger: "change",
+    },
+  ],
 });
+
+// 维修类型下拉框
+const typeOptions = ref([
+  {
+    value: 1,
+    label: "小区卫生",
+  },
+  {
+    value: 2,
+    label: "花坛绿化",
+  },
+  {
+    value: 3,
+    label: "管道堵塞",
+  },
+  {
+    value: 4,
+    label: "公共水电",
+  },
+  {
+    value: 5,
+    label: "楼道电梯",
+  },
+  {
+    value: 6,
+    label: "其他",
+  },
+]);
 
 /**
  * @description: 添加报修
@@ -117,7 +167,6 @@ const addRepair = () => {
  */
 const reset = () => {
   repairFormData.value.address = "";
-  repairFormData.value.content = "";
 };
 </script>
 

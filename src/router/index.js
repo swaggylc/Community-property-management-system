@@ -71,14 +71,31 @@ export default createRouter({
           meta: {
             title: "我的报修",
           },
-        },{
-          path: "/center/visitor_log",
-          name: "visitor_log",
-          component: () => import("@/page/visitor_log/VisitorLog.vue"),
-          meta: {
-            title: "访客登记",
-          },
-        }
+        },
+        {
+          path: "/center/visitor",
+          name: "visitor",
+          component: () => import("@/page/visitor/index.vue"),
+          redirect: "/center/visitor/check",
+          children: [
+            {
+              path: "/center/visitor/log",
+              name: "visitor_log",
+              component: () => import("@/page/visitor/sub/VisitorLog.vue"),
+              meta: {
+                title: "访客记录",
+              },
+            },
+            {
+              path: "/center/visitor/check",
+              name: "visitor_check",
+              component: () => import("@/page/visitor/sub/VisitorCheck.vue"),
+              meta: {
+                title: "访客登记",
+              },
+            },
+          ],
+        },
       ],
     },
     {

@@ -1,6 +1,6 @@
 <template>
     <div>
-        访客登记
+        访客记录
     </div>
 </template>
 

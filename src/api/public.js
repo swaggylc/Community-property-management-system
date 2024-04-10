@@ -32,3 +32,11 @@ export const UPDATE_REPAIR = (params) => {
 export const ADD_APPRAISE = (params) => {
   return request.post("/public/appraise", params);
 };
+// 查询报修信息
+export const GET_REPAIR_CONDITION = (params) => {
+  return request.post("/public/repair_list/condition", params);
+};
+// 访客登记
+export const ADD_VISITOR_CHECK = (params) => {
+  return request.post("/public/add_visitor_check", params);
+};

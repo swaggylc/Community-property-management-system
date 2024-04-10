@@ -67,15 +67,31 @@
               <i class="iconfont icon-baoxiujilu"></i>
               <span>报修记录</span>
             </el-menu-item>
-            <el-menu-item
-              v-if="userStore.userInfo.type == 1"
-              index="visitor_log"
-              @click="handleSelect('visitor_log')"
-            >
-              <i class="iconfont icon-rusuodengji"></i>
-              <span>访客登记</span>
-            </el-menu-item>
+            <el-sub-menu index="visitor" v-if="userStore.userInfo.type == 1">
+              <template #title>
+                <i
+                  class="iconfont icon-baoxiujilu"
+                  style="margin-right: 8px"
+                ></i>
+                <span>访客</span>
+              </template>
+              <el-menu-item
+                index="visitor_check"
+                @click="handleSelect('visitor_check')"
+              >
+                <i class="iconfont icon-baoxiujilu"></i>
+                <span>访客登记</span>
+              </el-menu-item>
+              <el-menu-item
+                index="visitor_log"
+                @click="handleSelect('visitor_log')"
+              >
+                <i class="iconfont icon-baoxiujilu"></i>
+                <span>访客记录</span>
+              </el-menu-item>
+            </el-sub-menu>
           </el-menu>
+
           <div class="aside-info">
             <p>有更多问题请咨询客服</p>
             <img :src="wechat" alt="" />
@@ -144,6 +160,16 @@ const logout = () => {
     background: #545c64;
     .el-menu-vertical-demo {
       border-right: none;
+      .el-sub-menu {
+        :deep(.el-sub-menu__title) {
+          display: flex;
+          justify-content: center;
+          align-items: center;
+        }
+        :deep(.el-sub-menu__icon-arrow) {
+          right: 58px;
+        }
+      }
       .el-menu-item {
         display: flex;
         justify-content: center;

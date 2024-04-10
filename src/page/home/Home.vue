@@ -9,6 +9,90 @@
         <span :title="encourageObj">{{ encourageObj }}</span>
       </div>
     </div>
+    <el-card style="width: 100%; margin-top: 20px">
+      <template #header>
+        <div class="card-header">
+          <span>今日天气</span>
+        </div>
+      </template>
+      <el-descriptions
+        class="margin-top"
+        :column="3"
+        :size="size"
+        border
+        v-loading="weatherShow"
+      >
+        <template #extra>
+          <el-button type="primary">查看天气预报</el-button>
+        </template>
+        <el-descriptions-item>
+          <template #label>
+            <div class="cell-item">
+              <el-icon :style="iconStyle">
+                <LocationFilled />
+              </el-icon>
+              位置
+            </div>
+          </template>
+          {{ weatherData.province }}-{{ weatherData.city }}
+        </el-descriptions-item>
+        <el-descriptions-item>
+          <template #label>
+            <div class="cell-item">
+              <el-icon :style="iconStyle">
+                <Sunrise />
+              </el-icon>
+              天气
+            </div>
+          </template>
+          {{ weatherData.weather }}
+        </el-descriptions-item>
+        <el-descriptions-item>
+          <template #label>
+            <div class="cell-item">
+              <el-icon :style="iconStyle">
+                <Odometer />
+              </el-icon>
+              气温
+            </div>
+          </template>
+          {{ weatherData.temperature }}°C
+        </el-descriptions-item>
+        <el-descriptions-item>
+          <template #label>
+            <div class="cell-item">
+              <el-icon :style="iconStyle">
+                <Rank />
+              </el-icon>
+              风向
+            </div>
+          </template>
+          {{ weatherData.winddirection }}
+        </el-descriptions-item>
+        <el-descriptions-item>
+          <template #label>
+            <div class="cell-item">
+              <el-icon :style="iconStyle">
+                <WindPower />
+              </el-icon>
+              风力
+            </div>
+          </template>
+          {{ weatherData.windpower }}
+        </el-descriptions-item>
+        <el-descriptions-item>
+          <template #label>
+            <div class="cell-item">
+              <el-icon :style="iconStyle">
+                <Clock />
+              </el-icon>
+              更新时间
+            </div>
+          </template>
+          {{ weatherData.reporttime }}
+        </el-descriptions-item>
+      </el-descriptions>
+    </el-card>
     <div class="home-carousel">
       <el-carousel indicator-position="outside">
         <el-carousel-item v-for="item in swiperArr" :key="item.id">
@@ -26,9 +110,18 @@ import avatarImg from "@/assets/images/avatar.jpg";
 import swiperOne from "@/assets/images/swiper_one.jpg";
 import swiperTwo from "@/assets/images/swiper_two.jpg";
 import swiperThree from "@/assets/images/swiper_three.jpg";
-import { reactive, onMounted, ref } from "vue";
+import { reactive, onMounted, ref, computed } from "vue";
 import { getNowTime } from "@/utils/utils.js";
 import { ElNotification } from "element-plus";
+import { ElMessage } from "element-plus";
+import {
+  Sunrise,
+  Odometer,
+  Clock,
+  Rank,
+  LocationFilled,
+  WindPower,
+} from "@element-plus/icons-vue";
 let userStore = useUserStore();
 
 let encourageObj = ref("");
@@ -48,8 +141,28 @@ let swiperArr = [
   },
 ];
 
+const weatherData = ref({});
+
+const weatherShow = ref(true);
+
+const adcode = ref("");
+
+const size = ref("default");
+
+const iconStyle = computed(() => {
+  const marginMap = {
+    large: "8px",
+    default: "6px",
+    small: "4px",
+  };
+  return {
+    marginRight: marginMap[size.value] || marginMap.default,
+  };
+});
+
 onMounted(() => {
   hasDailySentence();
+  getIpLocation();
 });
 
 /**
@@ -61,14 +174,14 @@ const getSoup = () => {
     encourageObj.value = res.data.text;
     userStore.dailySentence = res.data.text;
   });
-    ElNotification({
+  ElNotification({
     title: getNowTime(),
     message: "欢迎来到xx小区物业管理系统",
     type: "success",
   });
 };
 /**
- * @description:
+ * @description:本地是否存储每日鸡汤
  * @param {}
  * @return {}
  */
@@ -77,6 +190,49 @@ const hasDailySentence = () => {
     encourageObj.value = userStore.dailySentence;
   } else {
     getSoup();
+  }
+};
+
+/**
+ * @description: 调用高德天气api
+ * @param {}
+ * @return {}
+ */
+const getWeather = async () => {
+  const res = await axios.get(
+    "https://restapi.amap.com/v3/weather/weatherInfo",
+    {
+      params: {
+        key: "b0263a5b4c8c29efb1c9e97b7c18d76f",
+        city: adcode.value,
+      },
+    }
+  );
+  if (res.data.status == 1) {
+    weatherData.value = res.data.lives[0];
+    weatherShow.value = false;
+  } else {
+    ElMessage({
+      message: "获取天气信息失败",
+      type: "error",
+    });
+  }
+};
+
+/**
+ * @description: 调用高德ip定位接口
+ * @param {}
+ * @return {}
+ */
+const getIpLocation = async () => {
+  const res = await axios.get("https://restapi.amap.com/v3/ip", {
+    params: {
+      key: "b0263a5b4c8c29efb1c9e97b7c18d76f",
+    },
+  });
+  if (res.data.status == 1) {
+    adcode.value = res.data.adcode;
+    getWeather();
   }
 };
 </script>
@@ -129,6 +285,10 @@ const hasDailySentence = () => {
         -webkit-line-clamp: 3; /* 显示三行文本 */
       }
     }
+  }
+  .cell-item {
+    display: flex;
+    align-items: center;
   }
   .home-carousel {
     width: 100%;
