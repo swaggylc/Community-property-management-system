@@ -250,7 +250,7 @@ const getIpLocation = async () => {
     align-items: center;
     padding: 12px;
     width: 100%;
-    height: 220px;
+    height: 120px;
     border: 1px solid #ccc;
     border-radius: 4px;
     &:hover {
@@ -259,19 +259,20 @@ const getIpLocation = async () => {
       border-radius: 4px;
     }
     img {
-      width: 180px;
-      height: 180px;
+      width: 90px;
+      height: 90px;
       border-radius: 50%;
       border: 1px solid #ccc;
       margin-left: 50px;
       margin-right: 60px;
     }
     .home-text {
-      height: 180px;
+      height: 100%;
       p {
-        font-size: 32px;
+        font-size: 22px;
         color: #333;
         font-weight: 600;
+        margin: 8px 0;
       }
       span {
         font-size: 18px;
@@ -292,11 +293,11 @@ const getIpLocation = async () => {
   }
   .home-carousel {
     width: 100%;
-    height: 480px;
+    height: 320px;
     margin-top: 20px;
     ::v-deep(.el-carousel) {
       .el-carousel__container {
-        height: 480px;
+        height: 320px;
         .el-carousel__item {
           display: flex;
           color: #475669;

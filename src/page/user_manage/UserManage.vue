@@ -54,11 +54,11 @@
         :data="userList"
         border
         stripe
-        max-height="640"
+        max-height="600"
         class="user-manage-table"
       >
         <el-table-column type="index" align="center" />
-        <el-table-column prop="uid" label="Uid" align="center" />
+        <el-table-column prop="uid" label="用户ID" align="center" />
         <el-table-column
           prop="account"
           label="Account"
@@ -67,19 +67,19 @@
         />
         <el-table-column
           prop="username"
-          label="UserName"
+          label="昵称"
           width="150"
           align="center"
         />
-        <el-table-column prop="name" label="Name" align="center" />
+        <el-table-column prop="name" label="姓名" align="center" />
         <el-table-column
           prop="address"
-          label="Address"
+          label="地址"
           width="150"
           align="center"
         />
-        <el-table-column prop="sex" label="Sex" align="center" />
-        <el-table-column label="Options" align="center">
+        <el-table-column prop="sex" label="性别" align="center" />
+        <el-table-column label="操作" align="center">
           <template #default="scope">
             <div
               style="
@@ -119,13 +119,13 @@
             style="max-width: 600px"
             :rules="rules"
           >
-            <el-form-item label="name" prop="name">
+            <el-form-item label="姓名" prop="name">
               <el-input v-model="editInfo.name" />
             </el-form-item>
-            <el-form-item label="username" prop="username">
+            <el-form-item label="昵称" prop="username">
               <el-input v-model="editInfo.username" />
             </el-form-item>
-            <el-form-item label="sex">
+            <el-form-item label="性别">
               <el-select v-model="editInfo.sex" placeholder="请选择您的性别">
                 <el-option
                   v-for="item in sexOptions"
@@ -135,7 +135,7 @@
                 />
               </el-select>
             </el-form-item>
-            <el-form-item label="address" prop="address">
+            <el-form-item label="地址" prop="address">
               <el-input v-model="editInfo.address" />
             </el-form-item>
           </el-form>

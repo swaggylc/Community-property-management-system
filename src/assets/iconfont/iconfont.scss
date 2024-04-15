@@ -1,8 +1,8 @@
 @font-face {
   font-family: "iconfont"; /* Project id 4316411 */
-  src: url('//at.alicdn.com/t/c/font_4316411_57td2pbl6kr.woff2?t=1712228563404') format('woff2'),
-       url('//at.alicdn.com/t/c/font_4316411_57td2pbl6kr.woff?t=1712228563404') format('woff'),
-       url('//at.alicdn.com/t/c/font_4316411_57td2pbl6kr.ttf?t=1712228563404') format('truetype');
+  src: url('//at.alicdn.com/t/c/font_4316411_o4yh1hxwn2r.woff2?t=1712822486799') format('woff2'),
+       url('//at.alicdn.com/t/c/font_4316411_o4yh1hxwn2r.woff?t=1712822486799') format('woff'),
+       url('//at.alicdn.com/t/c/font_4316411_o4yh1hxwn2r.ttf?t=1712822486799') format('truetype');
 }
 
 .iconfont {
@@ -11,6 +11,10 @@
   font-style: normal;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+}
+
+.icon-duanxin:before {
+  content: "\e60a";
 }
 
 .icon-rusuodengji:before {

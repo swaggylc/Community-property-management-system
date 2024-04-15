@@ -6,20 +6,20 @@
           <span>我的报修记录</span>
         </div>
       </template>
-      <!-- 内容（保修列表） -->
+      <!-- 内容（报修列表） -->
       <el-table :data="myRepairList" style="width: 100%" stripe>
         <el-table-column type="index" align="center" />
-        <el-table-column prop="name" label="Name" width="80" />
-        <el-table-column prop="account" label="Account" align="center" />
+        <el-table-column prop="name" label="姓名" width="80" />
+        <el-table-column prop="account" label="账号" align="center" />
         <el-table-column
           prop="create_time"
-          label="Create Time"
+          label="创建时间"
           align="center"
         />
-        <el-table-column prop="address" label="Address" align="center" />
-        <el-table-column prop="content" label="Content" align="center" />
-        <el-table-column prop="appraise" label="Appraise" align="center" />
-        <el-table-column prop="status" label="Status" align="center">
+        <el-table-column prop="address" label="地址" align="center" />
+        <el-table-column prop="content" label="报修内容" align="center" />
+        <el-table-column prop="appraise" label="评价" align="center" />
+        <el-table-column prop="status" label="报修状态" align="center">
           <template #default="scope">
             <div
               style="
@@ -40,7 +40,7 @@
             </div>
           </template>
         </el-table-column>
-        <el-table-column label="Options" align="center">
+        <el-table-column label="操作" align="center">
           <template #default="scope">
             <div>
               <el-popconfirm

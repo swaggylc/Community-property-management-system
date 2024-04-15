@@ -45,18 +45,14 @@
           </div>
         </div>
       </template>
-      <el-table :data="repairList" style="width: 100%">
+      <el-table :data="repairList" style="width: 100%" max-height="600">
         <el-table-column type="index" align="center" />
-        <el-table-column
-          prop="repair_number"
-          label="RepairNumber"
-          align="center"
-        />
-        <el-table-column prop="name" label="Name" align="center" />
-        <el-table-column prop="account" label="Accound" align="center" />
-        <el-table-column prop="address" label="Address" align="center" />
-        <el-table-column prop="content" label="Content" align="center" />
-        <el-table-column label="Type" align="center">
+        <el-table-column prop="repair_number" label="报修单号" align="center" />
+        <el-table-column prop="name" label="姓名" align="center" />
+        <el-table-column prop="account" label="账号" align="center" />
+        <el-table-column prop="address" label="地址" align="center" />
+        <el-table-column prop="content" label="报修内容" align="center" />
+        <el-table-column label="处理状态" align="center">
           <template #default="scope">
             <span style="color: #909090">{{ scope.row.type }}</span>
           </template>
@@ -80,7 +76,7 @@
             >
           </template>
         </el-table-column>
-        <el-table-column label="Rate" align="center" width="200">
+        <el-table-column label="评分" align="center" width="200">
           <template #default="scope">
             <el-rate
               v-if="scope.row.status == 2"
@@ -95,7 +91,7 @@
             </template>
           </template>
         </el-table-column>
-        <el-table-column prop="create_time" label="CreateTime" align="center" />
+        <el-table-column prop="create_time" label="创建时间" align="center" />
         <el-table-column label="Options" align="center">
           <template #default="scope">
             <div>
@@ -117,13 +113,13 @@
         label-width="auto"
         style="max-width: 600px"
       >
-        <el-form-item label="RepairNumber">
+        <el-form-item label="报修单号">
           <el-input v-model="editFormData.repairNumber" disabled></el-input>
         </el-form-item>
-        <el-form-item label="Name">
+        <el-form-item label="姓名">
           <el-input v-model="editFormData.name" disabled></el-input>
         </el-form-item>
-        <el-form-item label="Status">
+        <el-form-item label="报修状态">
           <el-select v-model="editFormData.status" placeholder="报修状态">
             <el-option
               v-for="item in statusOptions"
@@ -133,7 +129,7 @@
             />
           </el-select>
         </el-form-item>
-        <el-form-item label="Content">
+        <el-form-item label="报修内容">
           <el-input
             v-model="editFormData.content"
             style="width: 240px"

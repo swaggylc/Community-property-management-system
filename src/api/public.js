@@ -36,7 +36,31 @@ export const ADD_APPRAISE = (params) => {
 export const GET_REPAIR_CONDITION = (params) => {
   return request.post("/public/repair_list/condition", params);
 };
+// 获取访客记录
+export const GET_VISITOR_LIST = () => {
+  return request.get("/public/get_visitor_list");
+};
 // 访客登记
 export const ADD_VISITOR_CHECK = (params) => {
   return request.post("/public/add_visitor_check", params);
+};
+// 修改访客记录
+export const UPDATE_VISITOR_CHECK = (params) => {
+  return request.post("/public/update_visitor", params);
+};
+// 删除访客记录
+export const DELETE_VISITOR_CHECK = (params) => {
+  return request.post("/public/delete_visitor", params);
+};
+// 搜索访客的接口
+export const SEARCH_VISITOR = (params) => {
+  return request.post("/public/search_visitor", params);
+};
+// 获取验证码
+export const GET_CODE = (params) => {
+  return request.get("/public/get_code", { params });
+};
+// 获取所有管理员信息
+export const GET_MANAGER = () => {
+  return request.get("/manager/get_manager");
 };
