@@ -96,6 +96,30 @@ export default createRouter({
             },
           ],
         },
+        {
+          path: "/center/complain_manage",
+          name: "complain_manage",
+          component: () => import("@/page/complain_manage/ComplainManage.vue"),
+          meta: {
+            title: "投诉管理",
+          },
+        },
+        {
+          path: "/center/go_complain",
+          name: "go_complain",
+          component: () => import("@/page/go_complain/GoComplain.vue"),
+          meta: {
+            title: "我要投诉",
+          },
+        },
+        {
+          path: "/center/my_complain",
+          name: "my_complain",
+          component: () => import("@/page/my_complain/MyComplain.vue"),
+          meta: {
+            title: "投诉记录",
+          },
+        }
       ],
     },
     {

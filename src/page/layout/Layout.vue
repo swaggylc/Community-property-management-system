@@ -90,6 +90,30 @@
                 <span>访客记录</span>
               </el-menu-item>
             </el-sub-menu>
+            <el-menu-item
+              v-if="userStore.userInfo.type == 0"
+              index="go_complain"
+              @click="handleSelect('go_complain')"
+            >
+              <i class="iconfont icon-baoxiujilu"></i>
+              <span>我要投诉</span>
+            </el-menu-item>
+            <el-menu-item
+              v-if="userStore.userInfo.type == 0"
+              index="my_complain"
+              @click="handleSelect('my_complain')"
+            >
+              <i class="iconfont icon-baoxiujilu"></i>
+              <span>投诉记录</span>
+            </el-menu-item>
+            <el-menu-item
+              v-if="userStore.userInfo.type == 1"
+              index="complain_manage"
+              @click="handleSelect('complain_manage')"
+            >
+              <i class="iconfont icon-baoxiujilu"></i>
+              <span>投诉管理</span>
+            </el-menu-item>
           </el-menu>
 
           <div class="aside-info">
