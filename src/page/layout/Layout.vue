@@ -95,7 +95,7 @@
               index="go_complain"
               @click="handleSelect('go_complain')"
             >
-              <i class="iconfont icon-baoxiujilu"></i>
+              <i class="iconfont icon-tousu_o"></i>
               <span>我要投诉</span>
             </el-menu-item>
             <el-menu-item
@@ -103,7 +103,7 @@
               index="my_complain"
               @click="handleSelect('my_complain')"
             >
-              <i class="iconfont icon-baoxiujilu"></i>
+              <i class="iconfont icon-tousujilu"></i>
               <span>投诉记录</span>
             </el-menu-item>
             <el-menu-item
@@ -111,7 +111,7 @@
               index="complain_manage"
               @click="handleSelect('complain_manage')"
             >
-              <i class="iconfont icon-baoxiujilu"></i>
+              <i class="iconfont icon-tousuguanli"></i>
               <span>投诉管理</span>
             </el-menu-item>
           </el-menu>
