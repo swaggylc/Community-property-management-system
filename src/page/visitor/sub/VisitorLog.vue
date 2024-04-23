@@ -68,13 +68,13 @@
                 type="primary"
                 :icon="Edit"
                 @click="handleEdit(scope.row)"
-                >Edit</el-button
+                >编辑</el-button
               >
               <el-button
                 type="danger"
                 :icon="Delete"
                 @click="handleDelete(scope.row.log_id)"
-                >Delete</el-button
+                >删除</el-button
               >
             </div>
           </template>

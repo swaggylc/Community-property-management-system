@@ -52,7 +52,7 @@
         <el-table-column prop="account" label="账号" align="center" />
         <el-table-column prop="address" label="地址" align="center" />
         <el-table-column prop="content" label="报修内容" align="center" />
-        <el-table-column label="处理状态" align="center">
+        <el-table-column label="类型" align="center">
           <template #default="scope">
             <span style="color: #909090">{{ scope.row.type }}</span>
           </template>
@@ -99,7 +99,7 @@
                 type="primary"
                 :icon="Edit"
                 @click="handleEdit(scope.row)"
-                >Edit</el-button
+                >编辑</el-button
               >
             </div>
           </template>

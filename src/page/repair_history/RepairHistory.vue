@@ -7,15 +7,16 @@
         </div>
       </template>
       <!-- 内容（报修列表） -->
-      <el-table :data="myRepairList" style="width: 100%" stripe>
+      <el-table
+        :data="myRepairList"
+        style="width: 100%"
+        stripe
+        max-height="600"
+      >
         <el-table-column type="index" align="center" />
         <el-table-column prop="name" label="姓名" width="80" />
         <el-table-column prop="account" label="账号" align="center" />
-        <el-table-column
-          prop="create_time"
-          label="创建时间"
-          align="center"
-        />
+        <el-table-column prop="create_time" label="创建时间" align="center" />
         <el-table-column prop="address" label="地址" align="center" />
         <el-table-column prop="content" label="报修内容" align="center" />
         <el-table-column prop="appraise" label="评价" align="center" />
@@ -61,7 +62,10 @@
                 @click="goAppraise(scope.row)"
                 >去评价</el-button
               >
-              <el-button v-if="scope.row.appraise_status == 1" type="default" disabled
+              <el-button
+                v-if="scope.row.appraise_status == 1"
+                type="default"
+                disabled
                 >已评价</el-button
               >
             </div>

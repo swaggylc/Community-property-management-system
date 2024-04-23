@@ -64,3 +64,23 @@ export const GET_CODE = (params) => {
 export const GET_MANAGER = () => {
   return request.get("/manager/get_manager");
 };
+// 查询所有投诉信息
+export const GET_COMPLAIN_LIST = () => {
+  return request.get("/public/get_complain_list");
+};
+// 用户添加投诉的接口
+export const ADD_COMPLAINT = (params) => {
+  return request.post("/public/add_complain", params);
+};
+// 根据联系方式获取报修信息
+export const GET_SELF_COMPLAIN = (account) => {
+  return request.get("/public/my_complain/" + account);
+};
+// 根据id删除投诉信息
+export const DELETE_COMPLAIN = (params) => {
+  return request.post("/public/delete_complain", params);
+};
+// 更改是否首次投诉
+export const UPDATE_COMPLAIN_REPEAT = (params) => {
+  return request.post("/public/update_complain_status", params);
+};
