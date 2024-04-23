@@ -119,7 +119,31 @@ export default createRouter({
           meta: {
             title: "投诉记录",
           },
-        }
+        },
+        {
+          path: "/center/notice",
+          name: "notice",
+          component: () => import("@/page/notice/index.vue"),
+          redirect: "/center/notice/add_notice",
+          children: [
+            {
+              path: "/center/notice/add_notice",
+              name: "add_notice",
+              component: () => import("@/page/notice/sub/AddNotice.vue"),
+              meta: {
+                title: "发布通知",
+              },
+            },
+            {
+              path: "/center/notice/notice_manage",
+              name: "notice_manage",
+              component: () => import("@/page/notice/sub/NoticeManage.vue"),
+              meta: {
+                title: "通知管理",
+              },
+            },
+          ],
+        },
       ],
     },
     {

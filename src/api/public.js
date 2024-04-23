@@ -84,3 +84,11 @@ export const DELETE_COMPLAIN = (params) => {
 export const UPDATE_COMPLAIN_REPEAT = (params) => {
   return request.post("/public/update_complain_status", params);
 };
+// 更新投诉信息
+export const UPDATE_COMPLAIN = (params) => {
+  return request.post("/public/update_complain", params);
+};
+// 账号设置的接口
+export const ACCOUNT_SETTING = (params) => {
+  return request.post("/public/account_setting", params);
+};

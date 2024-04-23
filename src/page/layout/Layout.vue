@@ -10,7 +10,9 @@
             <template #title>{{
               userStore.userInfo ? userStore.userInfo.username : ""
             }}</template>
-            <el-menu-item index="2-1">账号设置</el-menu-item>
+            <el-menu-item index="2-1" @click="accountSet"
+              >账号设置</el-menu-item
+            >
             <el-menu-item index="2-2" @click="logout">退出登录</el-menu-item>
           </el-sub-menu>
         </el-menu>
@@ -114,6 +116,29 @@
               <i class="iconfont icon-tousuguanli"></i>
               <span>投诉管理</span>
             </el-menu-item>
+            <el-sub-menu index="notice" v-if="userStore.userInfo.type == 1">
+              <template #title>
+                <i
+                  class="iconfont icon-baoxiujilu"
+                  style="margin-right: 8px"
+                ></i>
+                <span>通知</span>
+              </template>
+              <el-menu-item
+                index="add_notice"
+                @click="handleSelect('add_notice')"
+              >
+                <i class="iconfont icon-baoxiujilu"></i>
+                <span>发布通知</span>
+              </el-menu-item>
+              <el-menu-item
+                index="notice_manage"
+                @click="handleSelect('notice_manage')"
+              >
+                <i class="iconfont icon-baoxiujilu"></i>
+                <span>通知管理</span>
+              </el-menu-item>
+            </el-sub-menu>
           </el-menu>
 
           <div class="aside-info">
@@ -127,10 +152,54 @@
         </el-main>
       </el-container>
     </el-container>
+    <!-- 更改密码的弹框 -->
+    <el-dialog v-model="dialogVisible" title="账号设置">
+      <el-form
+        :model="accountFormData"
+        label-width="auto"
+        style="max-width: 600px"
+        :rules="rules"
+      >
+        <el-form-item label="账号" prop="account">
+          <el-input v-model="accountFormData.account" />
+        </el-form-item>
+        <el-form-item label="密码" prop="password">
+          <el-input v-model="accountFormData.password" />
+        </el-form-item>
+        <el-form-item label="姓名" prop="name">
+          <el-input v-model="accountFormData.name" />
+        </el-form-item>
+        <el-form-item label="昵称" prop="username">
+          <el-input v-model="accountFormData.username" />
+        </el-form-item>
+        <el-form-item label="住址" v-if="userStore.userInfo.type == 0" prop="address">
+          <el-input v-model="accountFormData.address" />
+        </el-form-item>
+        <el-form-item label="性别" v-if="userStore.userInfo.type == 0">
+          <el-select v-model="accountFormData.sex" style="width: 240px">
+            <el-option
+              v-for="item in sexOptions"
+              :key="item.value"
+              :label="item.label"
+              :value="item.value"
+            />
+          </el-select>
+        </el-form-item>
+      </el-form>
+      <template #footer>
+        <div class="dialog-footer">
+          <el-button @click="dialogVisible = false">取消</el-button>
+          <el-button type="primary" @click="dialogVisible = false">
+            确定
+          </el-button>
+        </div>
+      </template>
+    </el-dialog>
   </div>
 </template>
 
 <script setup>
+import { ref } from "vue";
 import useUserStore from "@/store/userInfo.js";
 import { useRoute, useRouter } from "vue-router";
 import wechat from "@/assets/images/wechat.jpg";
@@ -140,6 +209,36 @@ let userStore = useUserStore();
 let route = useRoute();
 let router = useRouter();
 const defaultActive = route.name || "home";
+
+const dialogVisible = ref(false);
+
+const accountFormData = ref({
+  account: userStore.userInfo.account,
+  password: "",
+  name: userStore.userInfo.name,
+  username: userStore.userInfo.username,
+  address: userStore.userInfo.address,
+  sex: userStore.userInfo.sex,
+});
+
+const sexOptions = ref([
+  {
+    label: "男",
+    value: "男",
+  },
+  {
+    label: "女",
+    value: "女",
+  },
+]);
+
+const rules = ref({
+  account: [{ required: true, message: "请输入账号", trigger: "blur" }],
+  password: [{ required: true, message: "请输入密码", trigger: "blur" }],
+  name: [{ required: true, message: "请输入姓名", trigger: "blur" }],
+  username: [{ required: true, message: "请输入昵称", trigger: "blur" }],
+  address: [{ required: true, message: "请输入住址", trigger: "blur" }],
+});
 
 /**
  * @description: 点击侧边菜单的回调
@@ -158,6 +257,15 @@ const logout = () => {
   REMOVE_TOKEN();
   // 跳转登录页
   router.push({ name: "login" });
+};
+
+/**
+ * @description: 点击账号设置的回调
+ * @param {}
+ * @return {}
+ */
+const accountSet = () => {
+  dialogVisible.value = true;
 };
 </script>
 

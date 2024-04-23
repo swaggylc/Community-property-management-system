@@ -317,7 +317,10 @@ const handleDelete = async (logId) => {
     codeDialogVisible.value = true;
   } else {
     // 如果是超级管理员直接删除
-    const res = await DELETE_VISITOR_CHECK(logId);
+    const res = await DELETE_VISITOR_CHECK({
+      logId,
+      account: userStore.userInfo.account,
+    });
     if (res.code == 200) {
       ElMessage.success("删除成功");
       getVisitorList();
@@ -410,7 +413,7 @@ const search = async () => {
   if (res.code == 200) {
     tableData.value = res.data;
   } else {
-    ElMessage.error('搜索失败，请重试！');
+    ElMessage.error("搜索失败，请重试！");
   }
 };
 </script>
