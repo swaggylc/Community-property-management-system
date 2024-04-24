@@ -142,6 +142,14 @@ export default createRouter({
                 title: "通知管理",
               },
             },
+            {
+              path: "/center/notice/notice_detail",
+              name: "notice_detail",
+              component: () => import("@/page/notice/sub/NoticeDetail.vue"),
+              meta: {
+                title: "通知详情",
+              },
+            }
           ],
         },
       ],

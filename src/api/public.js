@@ -100,3 +100,7 @@ export const GET_NOTICE = () => {
 export const ADD_NOTICE = (params) => {
   return request.post("/public/add_notice", params);
 };
+// 根据id获取通知信息
+export const GET_NOTICE_DETAIL = (id) => {
+  return request.get("/public/search_notice/" + id);
+};

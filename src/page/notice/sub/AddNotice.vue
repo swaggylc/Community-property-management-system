@@ -51,6 +51,9 @@ import { ADD_NOTICE } from "@/api/public";
 import myEditor from "@/components/my_editor/index.vue";
 import { ElMessage } from "element-plus";
 import useUserStore from "@/store/userInfo.js";
+import { useRouter } from "vue-router";
+
+const router = useRouter();
 
 const userStore = useUserStore();
 
@@ -64,6 +67,7 @@ const noticeFormData = ref({
   createTime: "",
   author: userStore.userInfo.name,
   level: 3,
+  text: "",
 });
 
 const rules = ref({
@@ -77,7 +81,7 @@ const rules = ref({
  */
 const handlerChange = (editorRef) => {
   noticeFormData.value.content = editorRef.value.getHtml();
-  console.log(editorRef);
+  noticeFormData.value.text = editorRef.value.getText();
   editor.value = editorRef.value;
 };
 
@@ -112,6 +116,10 @@ const submit = () => {
       ElMessage({
         type: "success",
         message: "发布成功",
+      });
+      // 跳转到管理页
+      router.push({
+        name: "notice_manage",
       });
     }
   });
