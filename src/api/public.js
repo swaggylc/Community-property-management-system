@@ -92,3 +92,11 @@ export const UPDATE_COMPLAIN = (params) => {
 export const ACCOUNT_SETTING = (params) => {
   return request.post("/public/account_setting", params);
 };
+// 获取所有通知
+export const GET_NOTICE = () => {
+  return request.get("/public/get_notice");
+};
+// 添加一则通知
+export const ADD_NOTICE = (params) => {
+  return request.post("/public/add_notice", params);
+};
