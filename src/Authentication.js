@@ -37,7 +37,10 @@ router.beforeEach(async (to, from, next) => {
   // 判断仓库中是否有token，判断用户是否登录
   let token = userStore.userInfo;
   // 取出账号的type
-  let type = userStore.userInfo.type;
+  let type = "";
+  if (token) {
+    type = userStore.userInfo.type;
+  }
   // 已登录
   if (token) {
     // 判断是否需要管理员身份
