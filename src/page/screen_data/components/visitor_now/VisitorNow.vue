@@ -83,7 +83,7 @@ onMounted(() => {
     .top {
         .title {
             color: white;
-            font-size: 18px;
+            font-size: 28px;
             font-weight: 900;
         }
 
@@ -99,7 +99,7 @@ onMounted(() => {
             float: right;
             margin-top: 10px;
             color: #fff;
-            font-size: 14px;
+            font-size: 20px;
 
             span {
                 color: darkorange;

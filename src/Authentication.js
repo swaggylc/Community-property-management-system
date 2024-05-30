@@ -36,9 +36,22 @@ router.beforeEach(async (to, from, next) => {
   NProgress.start();
   // 判断仓库中是否有token，判断用户是否登录
   let token = userStore.userInfo;
+  // 取出账号的type
+  let type = userStore.userInfo.type;
   // 已登录
   if (token) {
-    next();
+    // 判断是否需要管理员身份
+    if (to.meta.requireManager) {
+      if (type == 1) {
+        next();
+      } else {
+        next({
+          name: "home",
+        });
+      }
+    } else {
+      next();
+    }
   } else {
     // 未登录
     //   判断跳转的路由是否在白名单中

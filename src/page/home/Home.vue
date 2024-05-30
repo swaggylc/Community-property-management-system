@@ -23,7 +23,7 @@
         v-loading="weatherShow"
       >
         <template #extra>
-          <el-button type="primary">查看天气预报</el-button>
+          <el-button type="primary" @click="weatherDetail">查看天气详情</el-button>
         </template>
         <el-descriptions-item>
           <template #label>
@@ -234,6 +234,15 @@ const getIpLocation = async () => {
     adcode.value = res.data.adcode;
     getWeather();
   }
+};
+
+/**
+* @description: 点击查看天气详情
+* @param {} 
+* @return {} 
+*/
+const weatherDetail = () => {
+  window.open("https://weather.cma.cn/");
 };
 </script>
 

@@ -114,7 +114,7 @@ const getSexRatio = async () => {
   .title {
     p {
       color: white;
-      font-size: 18px;
+      font-size: 28px;
       font-weight: 900;
     }
 
@@ -159,6 +159,9 @@ const getSexRatio = async () => {
     justify-content: space-around;
     margin-top: 20px;
     color: white;
+    p {
+      font-size: 20px;
+    }
   }
 
   .charts {

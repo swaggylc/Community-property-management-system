@@ -5,7 +5,14 @@
         <div class="header-title">小区物业管理系统</div>
         <el-menu class="el-header-menu" mode="horizontal" :ellipsis="false">
           <div class="flex-grow" />
-          <el-menu-item index="1">Processing Center</el-menu-item>
+          <div
+            class="head-message"
+            index="message"
+            @click="handleSelect('notice_manage')"
+          >
+            <i class="iconfont icon-xiaoxi-zhihui"></i>
+            <span style="margin-left: 4px">消息</span>
+          </div>
           <el-sub-menu index="2">
             <template #title>{{
               userStore.userInfo ? userStore.userInfo.username : ""
@@ -139,6 +146,14 @@
                 <span>通知管理</span>
               </el-menu-item>
             </el-sub-menu>
+            <el-menu-item
+              v-if="userStore.userInfo.type == 0"
+              index="user_notice"
+              @click="handleSelect('notice_manage')"
+            >
+              <i class="iconfont icon-tousuguanli"></i>
+              <span>通知公告</span>
+            </el-menu-item>
           </el-menu>
 
           <div class="aside-info">
@@ -172,7 +187,11 @@
         <el-form-item label="昵称" prop="username">
           <el-input v-model="accountFormData.username" />
         </el-form-item>
-        <el-form-item label="住址" v-if="userStore.userInfo.type == 0" prop="address">
+        <el-form-item
+          label="住址"
+          v-if="userStore.userInfo.type == 0"
+          prop="address"
+        >
           <el-input v-model="accountFormData.address" />
         </el-form-item>
         <el-form-item label="性别" v-if="userStore.userInfo.type == 0">
@@ -189,9 +208,7 @@
       <template #footer>
         <div class="dialog-footer">
           <el-button @click="dialogVisible = false">取消</el-button>
-          <el-button type="primary" @click="dialogVisible = false">
-            确定
-          </el-button>
+          <el-button type="primary" @click="submit"> 确定 </el-button>
         </div>
       </template>
     </el-dialog>
@@ -204,6 +221,8 @@ import useUserStore from "@/store/userInfo.js";
 import { useRoute, useRouter } from "vue-router";
 import wechat from "@/assets/images/wechat.jpg";
 import { REMOVE_TOKEN } from "@/utils/localFunction.js";
+import { ACCOUNT_SETTING } from "@/api/public.js";
+import { ElMessage } from "element-plus";
 
 let userStore = useUserStore();
 let route = useRoute();
@@ -219,6 +238,8 @@ const accountFormData = ref({
   username: userStore.userInfo.username,
   address: userStore.userInfo.address,
   sex: userStore.userInfo.sex,
+  type: userStore.userInfo.type,
+  uid: userStore.userInfo.uid,
 });
 
 const sexOptions = ref([
@@ -267,6 +288,25 @@ const logout = () => {
 const accountSet = () => {
   dialogVisible.value = true;
 };
+
+/**
+ * @description:
+ * @param {}
+ * @return {}
+ */
+const submit = async () => {
+  const res = await ACCOUNT_SETTING(accountFormData.value);
+  if (res.code == 200) {
+    dialogVisible.value = false;
+    // 提示重新登录
+    ElMessage({
+      message: "修改成功，请重新登录",
+      type: "success",
+    });
+    // 退出登录
+    logout();
+  }
+};
 </script>
 
 <style lang="scss" scoped>
@@ -281,6 +321,16 @@ const accountSet = () => {
     .el-header-menu {
       flex: 1;
       justify-content: end;
+      .head-message {
+        display: flex;
+        align-items: center;
+        border-bottom: 3px solid transparent;
+        font-size: 14px;
+        cursor: pointer;
+      }
+      .head-message:hover {
+        color: #409eff;
+      }
     }
   }
   .aside {

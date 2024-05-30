@@ -2,7 +2,7 @@
     <div class="ranking">
         <div class="title">
             <p>报修种类排行</p>
-            <img src="../../images/dataScreen-title.png" alt="">
+            <img src="../../../../assets/images/dataScreen-title.png" alt="">
         </div>
         <div class="content" ref="ranking"></div>
     </div>
@@ -50,7 +50,8 @@ onMounted(() => {
                             return params.name + ' ' + params.value + '起';
                         },
                         position: 'center'
-                    }
+                    },
+                    fontSize: 14
                 },
                 itemStyle: {
                     normal: {
@@ -81,7 +82,7 @@ onMounted(() => {
     .title {
         p {
             color: white;
-            font-size: 18px;
+            font-size: 28px;
             font-weight: 900;
         }
 

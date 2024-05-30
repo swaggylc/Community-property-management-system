@@ -2,7 +2,7 @@
     <div class="type">
         <div class="title">
             <p>预约访客渠道统计</p>
-            <img src="../../images/dataScreen-title.png" alt="">
+            <img src="../../../../assets/images/dataScreen-title.png" alt="">
         </div>
         <div class="content" ref="type"></div>
     </div>
@@ -97,7 +97,7 @@ onMounted(() => {
                     textStyle: {
                         fontSize: 12
                     }
-                }
+                },
             },
             outline: {
                 itemStyle: {
@@ -156,7 +156,7 @@ onMounted(() => {
     .title {
         p {
             color: white;
-            font-size: 18px;
+            font-size: 28px;
             font-weight: 900;
         }
 

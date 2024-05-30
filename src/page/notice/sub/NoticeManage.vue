@@ -41,7 +41,7 @@
           <template #default="scope">
             <el-button
               type="primary"
-              size="mini"
+              size="default"
               @click="handlerDetail(scope.row.id)"
               >查看详情</el-button
             >

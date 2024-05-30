@@ -46,6 +46,7 @@ export default createRouter({
           component: () => import("@/page/user_manage/UserManage.vue"),
           meta: {
             title: "用户管理",
+            requireManager: true,
           },
         },
         {
@@ -54,6 +55,7 @@ export default createRouter({
           component: () => import("@/page/repair_manage/RepairManage.vue"),
           meta: {
             title: "报修管理",
+            requireManager: true,
           },
         },
         {
@@ -84,6 +86,7 @@ export default createRouter({
               component: () => import("@/page/visitor/sub/VisitorLog.vue"),
               meta: {
                 title: "访客记录",
+                requireManager: true,
               },
             },
             {
@@ -92,6 +95,7 @@ export default createRouter({
               component: () => import("@/page/visitor/sub/VisitorCheck.vue"),
               meta: {
                 title: "访客登记",
+                requireManager: true,
               },
             },
           ],
@@ -102,6 +106,7 @@ export default createRouter({
           component: () => import("@/page/complain_manage/ComplainManage.vue"),
           meta: {
             title: "投诉管理",
+            requireManager: true,
           },
         },
         {
@@ -132,6 +137,7 @@ export default createRouter({
               component: () => import("@/page/notice/sub/AddNotice.vue"),
               meta: {
                 title: "发布通知",
+                requireManager: true,
               },
             },
             {
@@ -149,7 +155,7 @@ export default createRouter({
               meta: {
                 title: "通知详情",
               },
-            }
+            },
           ],
         },
       ],

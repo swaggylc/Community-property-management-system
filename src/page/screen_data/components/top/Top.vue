@@ -80,6 +80,7 @@ const toHome = (() => {
             line-height: 40px;
             color: #29fcff;
             cursor: pointer;
+            font-size: 24px;
         }
     }
 
@@ -94,7 +95,7 @@ const toHome = (() => {
             text-align: center;
             line-height: 74px;
             color: #29fcff;
-            font-size: 24px;
+            font-size: 40px;
         }
     }
 
@@ -111,6 +112,7 @@ const toHome = (() => {
             text-align: center;
             line-height: 40px;
             color: #29fcff;
+            font-size: 24px;
         }
 
         .time {

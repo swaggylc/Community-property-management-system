@@ -39,7 +39,10 @@ onMounted(() => {
                     { value: 20, name: '42-55' },
                     { value: 18, name: '55-65' },
                     { value: 16, name: '65以上' }
-                ]
+                ],
+                label:{
+                    fontSize:14
+                }
             }
         ]
     })
@@ -58,7 +61,7 @@ onMounted(() => {
     .title {
         p {
             color: white;
-            font-size: 18px;
+            font-size: 28px;
             font-weight: 900;
         }
 

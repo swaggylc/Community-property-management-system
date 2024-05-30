@@ -2,7 +2,7 @@
     <div class="numbers">
         <div class="title">
             <p>年度访客量对比</p>
-            <img src="../../images/dataScreen-title.png" alt="">
+            <img src="../../../../assets/images/dataScreen-title.png" alt="">
         </div>
         <div class="content" ref="numbers"></div>
     </div>
@@ -179,7 +179,7 @@ onMounted(() => {
     .title {
         p {
             color: white;
-            font-size: 18px;
+            font-size: 28px;
             font-weight: 900;
         }
 
