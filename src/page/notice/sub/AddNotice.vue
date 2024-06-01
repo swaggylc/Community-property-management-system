@@ -113,14 +113,14 @@ const submit = () => {
       noticeFormData.value.level = 3;
       // 清空编辑器
       editor && editor.value.setHtml("");
-      ElMessage({
-        type: "success",
-        message: "发布成功",
+      // 跳转到详情页
+      const url = router.resolve({
+        name: "notice_detail",
+        query: {
+          id: res.id,
+        },
       });
-      // 跳转到管理页
-      router.push({
-        name: "notice_manage",
-      });
+      window.open(url.href, "_blank");
     }
   });
 };
